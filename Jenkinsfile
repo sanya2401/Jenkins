@@ -5,50 +5,51 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                // Example using Maven to build the project
-                sh 'mvn clean package'
+                // Use Maven command for Windows (assuming Maven is installed and configured in PATH)
+                bat 'mvn clean package'
             }
         }
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Running Unit and Integration Tests...'
-                // Example using Maven for running tests
-                sh 'mvn test'
+                // Running tests with Maven on Windows
+                bat 'mvn test'
             }
         }
         stage('Code Analysis') {
             steps {
                 echo 'Analyzing Code Quality...'
-                // Example using SonarQube scanner
-                sh 'sonar-scanner'
+                // Running SonarQube scanner on Windows, make sure SonarQube is installed and configured
+                bat 'sonar-scanner.bat'
             }
         }
         stage('Security Scan') {
             steps {
                 echo 'Performing Security Scan...'
-                // Example using OWASP Dependency-Check
-                sh 'dependency-check.sh --project JenkinsPipeline --scan ./'
+                // Running OWASP Dependency-Check on Windows (assuming it's installed)
+                bat 'dependency-check.bat --project JenkinsPipeline --scan ./'
             }
         }
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to Staging Server...'
-                // Example deployment command, replace with actual deployment script
-                sh 'scp target/my-app.jar user@staging-server:/deployments/'
+                // Use a deployment script that works for Windows
+                // For example, use WinSCP or PowerShell script for SCP-like behavior
+                // bat 'pscp.exe target\\my-app.jar user@staging-server:/deployments/'
             }
         }
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Running Integration Tests on Staging...'
-                // Example of integration tests on staging
-                sh 'curl -s http://staging-server:8080/api/test | grep "All tests passed"'
+                // Running curl for Windows (ensure curl is installed or use Invoke-WebRequest with PowerShell)
+                bat 'curl.exe -s http://staging-server:8080/api/test | findstr "All tests passed"'
             }
         }
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to Production Server...'
-                // Example deployment command to production
-                sh 'scp target/my-app.jar user@production-server:/deployments/'
+                // Use a deployment script that works for Windows (e.g., WinSCP, PowerShell)
+                // bat 'pscp.exe target\\my-app.jar user@production-server:/deployments/'
             }
         }
     }
