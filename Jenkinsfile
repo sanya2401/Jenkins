@@ -7,7 +7,7 @@ pipeline {
                 echo 'Checking out code from GitHub...'
                 // Replace 'your-credentials-id' with the actual credentials ID you've set in Jenkins
                 // Replace 'main' with the branch you are using (if it's not 'main')
-                git branch: 'main', url: 'https://github.com/sanya2401/Jenkins', credentialsId: 'github-credentials'
+                git branch: 'main', url: 'https://github.com/sanya2401/Jenkins', credentialsId: '2c7d77af-f349-4265-a65d-263ae91e0ee1'
             }
         }
 
