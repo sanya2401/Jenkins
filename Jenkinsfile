@@ -5,64 +5,65 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out code from GitHub...'
-                // Cloning the repository from GitHub
-                git 'https://github.com/sanya2401/Jenkins'  // Replace with your actual repository URL
+                // Replace 'your-credentials-id' with the actual credentials ID you've set in Jenkins
+                // Replace 'main' with the branch you are using (if it's not 'main')
+                git branch: 'main', url: 'https://github.com/sanya2401/Jenkins', credentialsId: 'your-credentials-id'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                // Use your own build script or direct commands for building the project
-                bat 'build.bat'  // Replace with your actual build commands or scripts
+                // Use your build script or commands here (replace with actual build commands)
+                bat 'build.bat'
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Running Unit and Integration Tests...'
-                // Run your test scripts or commands here
-                bat 'run-tests.bat'  // Replace with your actual test commands
+                // Add your test commands here (replace with actual test commands)
+                bat 'run-tests.bat'
             }
         }
 
         stage('Code Analysis') {
             steps {
                 echo 'Analyzing Code Quality...'
-                // Example: Running a code analysis tool like ESLint, or any other tool you're using
-                bat 'npm run lint'  // Example for a Node.js project; replace with your analysis tool or script
+                // Add your code analysis tool commands here (replace with actual commands)
+                bat 'npm run lint'
             }
         }
 
         stage('Security Scan') {
             steps {
                 echo 'Performing Security Scan...'
-                // Example: Running OWASP Dependency-Check or another security tool
-                bat 'dependency-check.bat --project JenkinsPipeline --scan ./'  // Replace with your security scan tool or script
+                // Add your security scan commands here (replace with actual security scan commands)
+                bat 'dependency-check.bat --project JenkinsPipeline --scan ./'
             }
         }
 
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to Staging Server...'
-                // Use a deployment script or file transfer command (replace with your actual deployment process)
-                bat 'pscp.exe target\\my-app.jar user@staging-server:/deployments/'  // Example for SCP; replace with your actual deployment command
+                // Use your deployment script or commands here
+                bat 'pscp.exe target\\my-app.jar user@staging-server:/deployments/'
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Running Integration Tests on Staging...'
-                // Run tests on the staging environment (modify based on your actual test script)
-                bat 'curl.exe -s http://staging-server:8080/api/test | findstr "All tests passed"'  // Example for an HTTP test; replace with your actual test command
+                // Replace with actual integration test commands
+                bat 'curl.exe -s http://staging-server:8080/api/test | findstr "All tests passed"'
             }
         }
 
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to Production Server...'
-                // Use a deployment script or file transfer command (replace with your actual deployment process)
-                bat 'pscp.exe target\\my-app.jar user@production-server:/deployments/'  // Example for SCP; replace with your actual deployment command
+                // Use your production deployment script or commands here
+                bat 'pscp.exe target\\my-app.jar user@production-server:/deployments/'
             }
         }
     }
@@ -86,7 +87,7 @@ pipeline {
         }
         always {
             echo 'Cleaning up...'
-            // Any cleanup tasks can go here
+            // Any cleanup tasks if necessary
         }
     }
 }
